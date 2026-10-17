@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.codevo.businessos.MySqlAcceptanceTest
+-------------------------------------------------------------------------------
+Tests run: 19, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.895 s -- in com.codevo.businessos.MySqlAcceptanceTest
