@@ -1,0 +1,8 @@
+app:
+  seed: false
+  secure-cookies: true
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

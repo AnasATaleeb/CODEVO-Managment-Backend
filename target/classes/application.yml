@@ -1,0 +1,61 @@
+debug: false
+spring:
+  application:
+    name: codevo-business-os
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://codevo-business-db.ckvgeg2we0q6.us-east-1.rds.amazonaws.com:3306/codevo_business_os}
+    username: ${SPRING_DATASOURCE_USERNAME:codevo_admin}
+    password: ${SPRING_DATASOURCE_PASSWORD:Anas2070$}
+    hikari:
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.jdbc.time_zone: UTC
+      hibernate.type.preferred_uuid_jdbc_type: CHAR
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 21MB
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  web:
+    error:
+      include-stacktrace: never
+      include-message: never
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+  structured:
+    format:
+      console: ecs
+app:
+  jwt-secret: ${JWT_SECRET:ThisisMySecrectPassForCODEVmangm}
+  access-token-ttl: ${ACCESS_TOKEN_TTL:PT10M}
+  refresh-token-ttl: ${REFRESH_TOKEN_TTL:P30D}
+  frontend-url: ${FRONTEND_URL:http://localhost:5173}
+  secure-cookies: ${SECURE_COOKIES:true}
+  storage-path: ${STORAGE_PATH:./storage}
+  seed: ${DEV_SEED:false}
+  bootstrap-owner-email: ${BOOTSTRAP_OWNER_EMAIL:anastaleeb750@gmail.com}
+  bootstrap-owner-password: ${BOOTSTRAP_OWNER_PASSWORD:CodevoOwner@2026StrongPassword}
+springdoc:
+  api-docs:
+    enabled: ${ENABLE_API_DOCS:false}
+  swagger-ui:
+    enabled: ${ENABLE_API_DOCS:false}
