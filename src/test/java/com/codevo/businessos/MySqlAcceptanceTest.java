@@ -35,13 +35,7 @@ class MySqlAcceptanceTest {
     @Autowired AttentionJobs jobs;
     String owner;
     @DynamicPropertySource static void database(DynamicPropertyRegistry p) {
-        String url=System.getenv().getOrDefault("TEST_DATABASE_URL","jdbc:mysql://127.0.0.1:3306/codevo_test?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true");
-        if(!url.matches("jdbc:mysql://(127\\.0\\.0\\.1|localhost)(:[0-9]+)?/[a-zA-Z0-9_]+_test(\\?.*)?"))
-            throw new IllegalArgumentException("Integration tests require a loopback MySQL schema ending in _test");
-        p.add("spring.datasource.url",()->url);
-        p.add("spring.datasource.username",()->System.getenv().getOrDefault("TEST_DATABASE_USERNAME","codevo_test"));
-        p.add("spring.datasource.password",()->System.getenv().getOrDefault("TEST_DATABASE_PASSWORD",""));
-        p.add("app.storage-path",()->"target/test-private-files");
+        TestDatabase.configure(p);
     }
     @BeforeAll void signInOwner() throws Exception { jdbc.update("update app_users set active=false where email<>?","acceptance-owner@example.test"); owner=login("acceptance-owner@example.test","Test-only-owner-password-2026").token; }
     Map<String,Object> obj(Object... entries) {

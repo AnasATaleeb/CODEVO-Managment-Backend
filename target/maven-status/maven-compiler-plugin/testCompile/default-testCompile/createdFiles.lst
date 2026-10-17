@@ -1,6 +1,8 @@
 com/codevo/businessos/FinanceWorkflowTest.class
-com/codevo/businessos/MigrationCompatibilityTest.class
 com/codevo/businessos/MySqlAcceptanceTest$Login.class
 com/codevo/businessos/CommercialWorkflowTest.class
+com/codevo/businessos/TestDatabaseTest.class
 com/codevo/businessos/DomainPolicyTest.class
+com/codevo/businessos/MigrationCompatibilityTest.class
+com/codevo/businessos/TestDatabase.class
 com/codevo/businessos/MySqlAcceptanceTest.class

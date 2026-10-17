@@ -10,11 +10,14 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 /** Upgrade real V4 records in a separate, empty native MySQL test schema. Never cleans a schema. */
 class MigrationCompatibilityTest {
     @Test void additiveCommercialMigrationsPreserveLegacySnapshotsAndNullableLinks() throws Exception {
-        String url=System.getenv("TEST_MIGRATION_DATABASE_URL");
-        assumeTrue(url!=null,"Supply a separate empty TEST_MIGRATION_DATABASE_URL");
-        if(!url.matches("jdbc:mysql://(127\\.0\\.0\\.1|localhost)(:[0-9]+)?/[a-zA-Z0-9_]+_test(\\?.*)?") || url.equals(System.getenv("TEST_DATABASE_URL")))
+        var settings=TestDatabase.settings();
+        String url=settings.get("TEST_MIGRATION_DATABASE_URL");
+        assumeTrue(url!=null && !url.isBlank(),"Supply a separate empty TEST_MIGRATION_DATABASE_URL");
+        TestDatabase database=TestDatabase.from(settings);
+        TestDatabase.validateUrl(url);
+        if(url.equals(database.url))
             throw new IllegalArgumentException("Migration verification requires a separate loopback test schema");
-        String user=System.getenv("TEST_DATABASE_USERNAME"),password=System.getenv("TEST_DATABASE_PASSWORD");
+        String user=database.username,password=database.password;
         try(var connection=DriverManager.getConnection(url,user,password)) {
             try(var rs=connection.getMetaData().getTables(connection.getCatalog(),null,"%",new String[]{"TABLE"})) { assertThat(rs.next()).as("Use a fresh empty schema for upgrade verification").isFalse(); }
         }

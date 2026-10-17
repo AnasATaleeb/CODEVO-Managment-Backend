@@ -3,3 +3,5 @@
 /Users/anas/Desktop/CODEVO/CODEVO-Managment/backend/src/test/java/com/codevo/businessos/FinanceWorkflowTest.java
 /Users/anas/Desktop/CODEVO/CODEVO-Managment/backend/src/test/java/com/codevo/businessos/MigrationCompatibilityTest.java
 /Users/anas/Desktop/CODEVO/CODEVO-Managment/backend/src/test/java/com/codevo/businessos/MySqlAcceptanceTest.java
+/Users/anas/Desktop/CODEVO/CODEVO-Managment/backend/src/test/java/com/codevo/businessos/TestDatabase.java
+/Users/anas/Desktop/CODEVO/CODEVO-Managment/backend/src/test/java/com/codevo/businessos/TestDatabaseTest.java

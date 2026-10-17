@@ -32,13 +32,7 @@ class FinanceWorkflowTest {
     @Autowired BusinessDates dates;
     String actor;
     @DynamicPropertySource static void database(DynamicPropertyRegistry p) {
-        String url=System.getenv().getOrDefault("TEST_DATABASE_URL","jdbc:mysql://127.0.0.1:3306/codevo_test?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true");
-        if(!url.matches("jdbc:mysql://(127\\.0\\.0\\.1|localhost)(:[0-9]+)?/[a-zA-Z0-9_]+_test(\\?.*)?"))
-            throw new IllegalArgumentException("Finance tests require loopback MySQL and an isolated _test schema");
-        p.add("spring.datasource.url",()->url);
-        p.add("spring.datasource.username",()->System.getenv().getOrDefault("TEST_DATABASE_USERNAME","codevo_test"));
-        p.add("spring.datasource.password",()->System.getenv().getOrDefault("TEST_DATABASE_PASSWORD",""));
-        p.add("app.storage-path",()->"target/test-private-files");
+        TestDatabase.configure(p);
     }
     @BeforeEach void actor() { actor=jdbc.queryForObject("select id from app_users where email='acceptance-owner@example.test'",String.class); }
     Map<String,Object> obj(Object... entries) { Map<String,Object> out=new LinkedHashMap<>();for(int i=0;i<entries.length;i+=2)out.put((String)entries[i],entries[i+1]);return out; }
